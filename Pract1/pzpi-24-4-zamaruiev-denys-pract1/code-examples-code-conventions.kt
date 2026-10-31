@@ -1,60 +1,40 @@
-//допоміжні класи
+// РЕКОМЕНДАЦІЯ 1
+// Погано
+val d = 5
+// Гарно
+val daysUntilExpiry = 5
 
-class User(val name: String, val status: Int) {
-    fun getStatus(): Int = status
-    fun getName(): String = name
-}
+// РЕКОМЕНДАЦІЯ 2
+// Погано: змінний стан
+var user = getUser()
+// Гарно: незмінне посилання
+val user1 = getUser()
 
-data class UserData(val name: String = "Олексій")
+// РЕКОМЕНДАЦІЯ 3
+// Погано: ризик крашу
+val name1 = user!!.name
+// Гарно: безпечний виклик
+val name2 = user?.name ?: "Anon"
 
-fun getUser(): UserData = UserData()
+// РЕКОМЕНДАЦІЯ 4
+val text = "  hello kotlin  "
 
-object StringUtils {
-    fun format(text: String): String = text.trim().uppercase()
-}
+// Погано: класи-утиліти
+val formatted1 = StringUtils.format(text)
 
-fun String.formatCustom(): String = this.trim().uppercase()
+// Гарно: extension-функція
+val formatted2 = text.formatCustom()
 
+// РЕКОМЕНДАЦІЯ 5
+val status = 0
 
-fun main() {
-    // РЕКОМЕНДАЦІЯ 1
-    // Погано
-    val d = 5
-    // Гарно
-    val daysUntilExpiry = 5
+// Погано
+if (status == 1) {}
 
-    // РЕКОМЕНДАЦІЯ 2
-    // Погано: змінний стан
-    var user = getUser()
-    // Гарно: незмінне посилання
-    val user1 = getUser()
+// Гарно
+val ACTIVE = 1
+if (status == ACTIVE) {}
 
-    // РЕКОМЕНДАЦІЯ 3
-    // Погано: ризик крашу
-    val name1 = user!!.name
-    // Гарно: безпечний виклик
-    val name2 = user?.name ?: "Anon"
-
-    // РЕКОМЕНДАЦІЯ 4
-    val text = "  hello kotlin  "
-
-    // Погано: класи-утиліти
-    val formatted1 = StringUtils.format(text)
-
-    // Гарно: extension-функція
-    val formatted2 = text.formatCustom()
-
-    // РЕКОМЕНДАЦІЯ 5
-    val status = 0
-
-    // Погано
-    if (status == 1) {}
-
-    // Гарно
-    val ACTIVE = 1
-    if (status == ACTIVE) {}
-
-}
 
 // ПРИКЛАД
 // Поганий приклад
